@@ -1,2 +1,2 @@
-# Ci-ncia-de-dados
+# Ciência-de-dados
 Repositório para implementar modelos de ML
