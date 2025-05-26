@@ -9,3 +9,4 @@ class EnumETL(Enum):
 # chave = Enum
 # valor = class de objeto ETL
 ETL_DICT ={}
+
