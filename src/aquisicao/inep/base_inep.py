@@ -24,6 +24,7 @@ class BaseINEP(BaseETL, abc.ABC):
 
         """
         Instanciar o objeto de ETL INEP
+
         :param entrada: string com caminho para pasta de entrada
         :param saida: string com caminho para pasta de saida
         :param base: Nome da base que vai na URL do INEP
@@ -38,7 +39,7 @@ class BaseINEP(BaseETL, abc.ABC):
 
         """
         Realiza o web-scraping da pagina de dados do INEP
-        :return: ndicionario com nome do arquivo e link para pagina
+        :return: dicionario com nome do arquivo e link para pagina
         """
 
         html = urllib.request.urlopen(self._url).read()
@@ -46,7 +47,6 @@ class BaseINEP(BaseETL, abc.ABC):
         soup = BeautifulSoup(html, features="lxml")
 
         return {tag["href"].split("_")[-1]: tag["href"] for tag in soup.find_all("a", {"class": "external-link"})}
-
 
 
     def dicionario_para_baixar(self) ->typing.Dict[str, str]:
@@ -70,8 +70,9 @@ class BaseINEP(BaseETL, abc.ABC):
         Realizadoo download dos dados INEP para uma pasta local
         """
 
-        for arq, link in self.dicionario_para_baixar():
-            caminho_arq = self.caminho_saida/arq
+        for arq, link in self.dicionario_para_baixar().items():
+            print(arq)
+            caminho_arq = self.caminho_saida / arq
             download_dados_web(caminho_arq,link)
 
 
